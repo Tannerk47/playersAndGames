@@ -141,7 +141,7 @@ public class runtime  {
             System.out.println(" what would you like to do " + "\n" + "1: one player game \n 2: Add player\n 3: remove player\n 999: quit");
             n = in.nextInt();
             switch(n) {
-                case 1: //games();
+                case 1:game(in , data);
                 break;
                 case 2: System.out.println(newPlayer(in, data));
                 break;
@@ -155,8 +155,8 @@ public class runtime  {
         in.nextLine();
         System.out.println("input new player name");
         String name = in.nextLine();
-        pList.add(new player(name));
-        data.newName(name);
+        pList.add(new player(name));// array list already public so it saves
+        data.newName(name); // calls method to change so also saves
         return name + " added to player list";
 
     }
@@ -174,6 +174,40 @@ public class runtime  {
             return"";
 
             }
+    }
+    public static void game(Scanner in, intitalData data){
+        System.out.println("1: one player game \n 2: two player game \n or 999 to cancel");
+        int n = in.nextInt();
+        if (n == 1 ){
+            singleGames(in);
+        } else if(n == 2){
+            duoGame(in);
+        }
+    }
+    public static void singleGames(Scanner in ){
+        System.out.println("which game would you like to play \n 1: safe cracker " );
+        int n = in.nextInt();
+        switch ( n ) {
+            case 1: safeCracker(in, choosePlayer(in));
+                break;
+
+        }
+    }
+
+    public static void duoGame(Scanner in) {
+
+    }
+    public static player choosePlayer(Scanner in){
+        System.out.println("who is playing the game");
+        for (int i = 1; i < pList.size()+1; i ++){
+            System.out.println(i+ ": "+ pList.get(i-1).getName());
+        }
+        return pList.get(in.nextInt()-1);
+    }
+
+    public static void safeCracker(Scanner in, player p){
+p.setWins(p.getWins()+1);
+System.out.println(p.getName()+ " wins =" + p.getWins());
     }
 }
 
